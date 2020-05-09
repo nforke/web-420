@@ -1,3 +1,14 @@
+/*
+===================================
+; Title: Assignment 2.3
+; Author: Nicole Forke
+; Date: 04 May 2020
+; Modified By: Nicole Forke
+; Description: API Gateway Part II
+===================================
+*/
+
+// require statements
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -8,6 +19,8 @@ var mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 
 var indexRouter = require('./routes/index');
+// require statement for api-catalog routes
+var apiCatalog = require('./routes/api-catalog');
 
 var app = express();
 
@@ -30,6 +43,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+
+// register API Catalog's routes
+app.use('/api', apiCatalog);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
