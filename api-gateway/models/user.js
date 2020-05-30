@@ -22,6 +22,8 @@ var userSchema = new mongoose.Schema({
   email: String
 });
 
+const User = module.exports = mongoose.model('User', userSchema);
+
 // export the model
 module.exports = mongoose.model('User', userSchema);
 
