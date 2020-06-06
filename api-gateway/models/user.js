@@ -3,7 +3,7 @@
 ; Title:  user.js
 ; Author: Nicole Forke
 ; Modified By: Nicole Forke
-; Date:   23 May 2020
+; Date:   06 June 2020
 ; Description: User model and schema
 ;============================================================
 */
@@ -22,11 +22,12 @@ var userSchema = new mongoose.Schema({
   email: String
 });
 
+// export the model
 const User = module.exports = mongoose.model('User', userSchema);
 
-// export the model
-module.exports = mongoose.model('User', userSchema);
-
+/**
+ * Database queries
+ */
 // user.save is used to add a new user in our database
 module.exports.add = (user, callback) => {
   user.save(callback);
@@ -38,6 +39,8 @@ module.exports.getById = (id, callback) => {
   User.findById(query, callback);
 };
 
-/**
- * Database queries
- */
+// user.getOne used to find individual user by email address
+module.exports.getOne = (e, callback) => {
+  var query = {email: e};
+  User.findOne(query, callback);
+};
