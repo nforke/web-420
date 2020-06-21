@@ -8,7 +8,7 @@
 ======================================================
 */
 
-// require statments
+// require statements
 var jwt = require('jsonwebtoken');
 var config = require('./config');
 
@@ -21,15 +21,17 @@ var config = require('./config');
 
  // check-token function
  function checkToken(req, res, next) {
+
    //access the request headers
    var token = req.headers['x-access-token'];
+
   // check if its null
    if (!token)
-    return res.status(403).send({auth: false, message: 'No token provided.'});
+    return res.status(403).send({ auth: false, message: 'No token provided.'});
 
     // verify the token
     jwt.verify(token, config.web.secret, function(err, decoded) {
-      if (err) return res.status(500).send({auth: false, message: 'Failed to authenticate token.'});
+      if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.'});
       //assignment
       req.userId = decoded.id;
       next();
